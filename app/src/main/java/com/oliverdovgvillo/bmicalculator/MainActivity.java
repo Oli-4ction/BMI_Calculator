@@ -56,6 +56,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void calculateBmi() {
+        String ageText = textAge.getText().toString();
+        String feetText = textFeet.getText().toString();
+        String inchesText = textInches.getText().toString();
+        String weightText = textWeight.getText().toString();
+
+        //resultText.setText("Age: " + ageText + ", Feet: " + feetText + ", Inches: " + inchesText + ", Weight: " + weightText);
+
+        //converting the number 'Strings' into 'int' variables
+        int age = Integer.parseInt(ageText);
+        int feet = Integer.parseInt(feetText);
+        int inches = Integer.parseInt(inchesText);
+        int weight = Integer.parseInt(weightText);
+
+        int totalInches = (feet * 12) + inches;
+
+        // height in meters is the inches multiplied by 0.254
+        double heightInMeters = totalInches * 0.0254;
+
+        //BMI formula = weight in kg devided by height in meters sqaured
+        double bmi = weight / (heightInMeters * heightInMeters);
+
+        //converting double into string
+        String bmiTextResult = String.valueOf(bmi);
+
+        resultText.setText("Your BMI is " + bmiTextResult);
 
     }
 
