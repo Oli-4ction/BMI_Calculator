@@ -10,10 +10,13 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.BreakIterator;
+import java.text.DecimalFormat;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    //class variables are also called 'Fields'
+    //class variables / 'Fields'
     private TextView resultText;
     private Button buttonCalculate;
     private RadioButton buttonMale;
@@ -22,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText textFeet;
     private EditText textInches;
     private EditText textWeight;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +54,24 @@ public class MainActivity extends AppCompatActivity {
         buttonCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calculateBmi();
+                double bmiResult = calculateBmi();
+
+                String ageText = textAge.getText().toString();
+                int age = Integer.parseInt(ageText);
+
+                if (age > 17) {
+                    displayResult(bmiResult);
+                } else {
+                    displayGuidance(bmiResult);
+                }
+
             }
         });
     }
 
-    private void calculateBmi() {
-        String ageText = textAge.getText().toString();
+
+    private double calculateBmi() {
+
         String feetText = textFeet.getText().toString();
         String inchesText = textInches.getText().toString();
         String weightText = textWeight.getText().toString();
@@ -64,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
         //resultText.setText("Age: " + ageText + ", Feet: " + feetText + ", Inches: " + inchesText + ", Weight: " + weightText);
 
         //converting the number 'Strings' into 'int' variables
-        int age = Integer.parseInt(ageText);
         int feet = Integer.parseInt(feetText);
         int inches = Integer.parseInt(inchesText);
         int weight = Integer.parseInt(weightText);
@@ -75,13 +89,38 @@ public class MainActivity extends AppCompatActivity {
         double heightInMeters = totalInches * 0.0254;
 
         //BMI formula = weight in kg devided by height in meters sqaured
-        double bmi = weight / (heightInMeters * heightInMeters);
+        return weight / (heightInMeters * heightInMeters);
+    }
 
-        //converting double into string
-        String bmiTextResult = String.valueOf(bmi);
+    private void displayResult(double bmi) {
+        DecimalFormat myDecimalFormatter = new DecimalFormat("0.00");
+        String bmiTextResult = myDecimalFormatter.format(bmi);
 
-        resultText.setText("Your BMI is " + bmiTextResult);
+        String fullResultString;
+        if (bmi < 18.5) {
+            fullResultString = bmiTextResult + " - You are underweight";
+        } else if (bmi > 25) {
+            fullResultString = bmiTextResult + " - You are overweight";
+        } else {
+            fullResultString = bmiTextResult + " - You are a healthy weight";
+        }
+        resultText.setText(fullResultString);
 
+    }
+
+    private void displayGuidance(double bmi) {
+        DecimalFormat myDecimalFormatter = new DecimalFormat("0.00");
+        String bmiTextResult = myDecimalFormatter.format(bmi);
+
+        String fullResultString;
+        if (buttonMale.isChecked()) {
+            fullResultString = bmiTextResult + " - You are under 18. Please consult with your doctor for the healthy range for boys under 18.";
+        } else if (buttonFemale.isChecked()) {
+            fullResultString = bmiTextResult + " - You are under 18. Please consult with your doctor for the healthy range for girls under 18.";
+        } else {
+            fullResultString = bmiTextResult + " - You are under 18. Please consult with your doctor for the healthy range";
+        }
+        resultText.setText(fullResultString);
     }
 
 }

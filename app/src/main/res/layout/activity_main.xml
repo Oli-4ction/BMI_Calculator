@@ -4,8 +4,8 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:padding="30dp">
-    //android:background="@drawable/bmi_back" ( full background opt )
+    android:padding="30dp"
+    android:background="@drawable/sunrise">
 
 
     <ImageView
@@ -14,11 +14,11 @@
         android:src="@drawable/bmi_calc_image" />
 
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:textColor="@color/white"
         android:text="BMI CALCULATOR" />
 
     <RadioGroup
@@ -31,12 +31,14 @@
             android:id="@+id/radio_button_male"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="Male" />
 
         <RadioButton
             android:id="@+id/radio_button_female"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="Female" />
 
     </RadioGroup>
@@ -46,6 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:textColor="@color/white"
         android:hint="Age"
         android:inputType="number" />
 
@@ -59,6 +62,7 @@
             android:id="@+id/edit_text_feet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:hint="Feet"
             android:inputType="number" />
 
@@ -66,6 +70,7 @@
             android:id="@+id/edit_text_inches"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:hint="Inches"
             android:inputType="number" />
 
@@ -77,7 +82,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:hint="Weight (KG)"
+        android:textColor="@color/white"
+        android:hint="Weight (kg)"
         android:inputType="number" />
 
     <Button
@@ -91,8 +97,7 @@
         android:id="@+id/text_view_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="24dp"
-        android:text="23.6 - You are a healthy weight" />
+        android:layout_margin="24dp" />
 
 
 </LinearLayout>
